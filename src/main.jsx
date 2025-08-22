@@ -1,8 +1,6 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
+import { render } from 'preact';
 import App from './app.jsx';
+import './index.css';
 
 const container = document.getElementById('app');
-const root = createRoot(container);
-root.render(<App />);
+render(<App />, container);
