@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.27.0"
+    "@vitejs/plugin-react": "^5.0.1",
+    "plugin-react": "^0.0.1-security",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.2",
-    "typescript": "~5.8.3",
-    "vite": "^7.1.2"
+    "vite": "^7.1.3"
   }
 }
