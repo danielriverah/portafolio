@@ -1,26 +1,39 @@
 import { h } from 'preact';
 
-export default function Nav() {
-  const handlePrivacyClick = (event) => {
-    event.preventDefault();
-    window.history.pushState(null, '', '/cosechasmega/privacidad');
-    window.dispatchEvent(new PopStateEvent('popstate'));
-  };
+const navigate = (event, path) => {
+  event.preventDefault();
+  const normalisedPath = path === '/' ? '/' : path.replace(/\/+$/, '');
+  const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
 
+  if (currentPath !== normalisedPath) {
+    window.history.pushState(null, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  }
+};
+
+export default function Nav() {
   return (
     <nav class="bg-gray-800 text-white p-4">
       <ul class="flex justify-center gap-4">
         <li>
-          <a href="#home" class="hover:underline">Inicio</a>
+          <a href="/" class="hover:underline" onClick={(event) => navigate(event, '/')}>Inicio</a>
         </li>
         <li>
-          <a href="#cv" class="hover:underline">CV</a>
+          <a href="/cv" class="hover:underline" onClick={(event) => navigate(event, '/cv')}>
+            CV
+          </a>
         </li>
         <li>
-          <a href="#portafolio" class="hover:underline">Portafolio</a>
+          <a
+            href="/portafolio"
+            class="hover:underline"
+            onClick={(event) => navigate(event, '/portafolio')}
+          >
+            Portafolio
+          </a>
         </li>
         <li>
-          <a href="/cosechasmega/privacidad" class="hover:underline" onClick={handlePrivacyClick}>
+          <a href="/privacidad" class="hover:underline" onClick={(event) => navigate(event, '/privacidad')}>
             Privacidad
           </a>
         </li>

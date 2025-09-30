@@ -1,33 +1,61 @@
-import { h } from 'preact';
-
 export default function CosechasMegaPrivacy() {
   return (
-    <section class="max-w-3xl mx-auto px-4 py-12 space-y-6">
+    <section class="max-w-3xl mx-auto px-6 py-12 space-y-6">
       <header class="space-y-2">
-        <h1 class="text-3xl font-bold text-gray-900">Política de Privacidad de Cosechas Mega</h1>
-        <p class="text-gray-600">
-          Esta página describe cómo Cosechas Mega protege la información de las personas usuarias de la aplicación.
+        <p class="text-sm uppercase tracking-[0.3em] text-indigo-500">Cosechas Mega</p>
+        <h1 class="text-3xl font-bold text-slate-900">Política de privacidad</h1>
+        <p class="text-slate-600">
+          Esta política describe cómo la suite Cosechas Mega maneja la información personal de productores y equipos en
+          campo. Última actualización: 10 de enero de 2024.
         </p>
       </header>
 
-      <article class="space-y-4 text-gray-700 leading-relaxed">
-        <p>
-          Cosechas Mega ha sido diseñada para ofrecer una experiencia sencilla y segura. No recopilamos, almacenamos ni
-          compartimos información personal identificable de quienes usan la aplicación. Tampoco utilizamos servicios de 
-          ni herramientas de terceros que rastreen a las personas usuarias.
-        </p>
+      <article class="space-y-4 text-slate-700 leading-relaxed">
+        <section class="space-y-2">
+          <h2 class="text-xl font-semibold text-slate-900">1. Información que procesamos</h2>
+          <p>
+            La aplicación móvil y el panel operativo almacenan en el dispositivo información sobre lotes, cosechas y
+            actividades programadas. Solo cuando el usuario sincroniza manualmente, estos datos viajan de forma cifrada
+            a los servicios de DevsRivera para respaldos y coordinación con el API de inventario.
+          </p>
+        </section>
 
-        <p>
-          Todos los datos que se muestran dentro de la aplicación permanecen en el dispositivo y únicamente se utilizan
-          para prestar las funciones básicas del producto. Si en el futuro llegamos a implementar nuevas
-          características que requieran recopilar información adicional, actualizaremos esta política y notificaremos a
-          las personas usuarias con antelación.
-        </p>
+        <section class="space-y-2">
+          <h2 class="text-xl font-semibold text-slate-900">2. Finalidad del procesamiento</h2>
+          <p>
+            Utilizamos los datos recopilados para habilitar reportes productivos, sincronización entre equipos y
+            auditorías internas. No comercializamos información con terceros ni la usamos para campañas publicitarias.
+          </p>
+        </section>
 
-        <p>
-          Si tienes preguntas sobre esta política de privacidad, puedes escribirnos a
-          <a class="text-indigo-600 font-medium" href="mailto:contacto@cosechasmega.com"> drh_river@hotmail.com</a>.
-        </p>
+        <section class="space-y-2">
+          <h2 class="text-xl font-semibold text-slate-900">3. Conservación y eliminación</h2>
+          <p>
+            Los datos permanecen en servidores ubicados en la Unión Europea con respaldos cifrados. Puedes solicitar la
+            eliminación definitiva de tus registros escribiendo a{' '}
+            <a class="text-indigo-600 font-semibold hover:underline" href="mailto:privacidad@cosechasmega.com">
+              privacidad@cosechasmega.com
+            </a>
+            . Responderemos en un máximo de 10 días hábiles.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-xl font-semibold text-slate-900">4. Derechos de los usuarios</h2>
+          <p>
+            Puedes acceder, rectificar o descargar la información asociada a tu cuenta desde el panel web. También
+            puedes oponerte al procesamiento contactando a nuestro equipo de soporte y se suspenderá la sincronización
+            mientras se revisa tu solicitud.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h2 class="text-xl font-semibold text-slate-900">5. Cambios a esta política</h2>
+          <p>
+            Notificaremos dentro de la aplicación y vía correo a los administradores registrados cada vez que actualicemos
+            esta política. Mantendremos un historial de versiones para consulta en el centro de confianza de DevsRivera.
+          </p>
+        </section>
       </article>
     </section>
   );
