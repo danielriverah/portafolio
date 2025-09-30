@@ -3,6 +3,7 @@ import Nav from './components/Nav.jsx';
 import Home from './pages/Home.jsx';
 import CV from './pages/CV.jsx';
 import Portfolio from './pages/Portfolio.jsx';
+import Privacy from './pages/Privacy.jsx';
 import CosechasMegaPrivacy from './pages/CosechasMegaPrivacy.jsx';
 
 // Ruta "limpia" que sí debe vivir con history API
@@ -85,14 +86,37 @@ import CV from './pages/CV.jsx';
 import Portfolio from './pages/Portfolio.jsx';
 import CosechasMegaPrivacy from './pages/CosechasMegaPrivacy.jsx';
 
-const getCurrentPage = () => {
-  const hash = window.location.hash.slice(1);
-  if (hash) {
-    return hash;
-  }
+const ROUTES = {
+  home: '/',
+  cv: '/cv',
+  portafolio: '/portafolio',
+  privacidad: '/privacidad',
+  'cosechasmega/privacidad': '/cosechasmega/privacidad',
+};
 
-  const path = window.location.pathname.replace(/^\/+/, '');
-  return path || 'home';
+const normalisePath = (pathname) => {
+  if (!pathname) return '/';
+  if (pathname === '/') return '/';
+  return pathname.replace(/\/+$/, '') || '/';
+};
+
+const getCurrentPage = () => {
+  const rawPath = normalisePath(window.location.pathname);
+
+  switch (rawPath) {
+    case '/':
+      return 'home';
+    case '/cv':
+      return 'cv';
+    case '/portafolio':
+      return 'portafolio';
+    case '/privacidad':
+      return 'privacidad';
+    case '/cosechasmega/privacidad':
+      return 'cosechasmega/privacidad';
+    default:
+      return 'home';
+  }
 };
 
 export default function App() {
@@ -100,29 +124,19 @@ export default function App() {
 
   useEffect(() => {
     const onRouteChange = () => setPage(getCurrentPage());
-    window.addEventListener('hashchange', onRouteChange);
     window.addEventListener('popstate', onRouteChange);
     return () => {
-      window.removeEventListener('hashchange', onRouteChange);
       window.removeEventListener('popstate', onRouteChange);
     };
   }, []);
 
   useEffect(() => {
-    if (page === 'cosechasmega/privacidad') {
-      const desiredPath = '/cosechasmega/privacidad';
-      const currentUrl = `${window.location.pathname}${window.location.hash}`;
-      if (currentUrl !== desiredPath) {
-        window.history.replaceState(null, '', desiredPath);
-      }
-    } else {
-      const desiredHash = `#${page}`;
-      if (window.location.pathname !== '/') {
-        window.history.replaceState(null, '', '/');
-      }
-      if (window.location.hash !== desiredHash) {
-        window.location.hash = desiredHash;
-      }
+    const desiredPath = ROUTES[page] ?? '/';
+    const currentPath = normalisePath(window.location.pathname);
+    const normalisedDesired = normalisePath(desiredPath);
+
+    if (currentPath !== normalisedDesired) {
+      window.history.replaceState(null, '', desiredPath);
     }
   }, [page]);
 
@@ -133,6 +147,7 @@ export default function App() {
         {page === 'home' && <Home />}
         {page === 'cv' && <CV />}
         {page === 'portafolio' && <Portfolio />}
+        {page === 'privacidad' && <Privacy />}
         {page === 'cosechasmega/privacidad' && <CosechasMegaPrivacy />}
       </main>
     </div>
