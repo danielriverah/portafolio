@@ -4,7 +4,7 @@ export default function CV() {
       <h2 class="text-3xl font-bold mb-4">Currículum Vitae</h2>
       <div class="flex flex-col items-center gap-4">
         <img src="/profile.svg" alt="Foto de perfil" class="w-32 h-32 rounded-full" />
-        <h3 class="text-2xl font-semibold">Juan Pérez</h3>
+        <h3 class="text-2xl font-semibold">Daniel Rivera Herrada</h3>
         <p class="text-center">
           {/* Reemplaza con una breve descripción personal */}
           Desarrollador web con pasión por crear experiencias intuitivas.

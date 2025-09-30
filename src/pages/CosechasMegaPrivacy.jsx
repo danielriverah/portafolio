@@ -13,8 +13,8 @@ export default function CosechasMegaPrivacy() {
       <article class="space-y-4 text-gray-700 leading-relaxed">
         <p>
           Cosechas Mega ha sido diseñada para ofrecer una experiencia sencilla y segura. No recopilamos, almacenamos ni
-          compartimos información personal identificable de quienes usan la aplicación. Tampoco utilizamos servicios de
-          analítica, publicidad ni herramientas de terceros que rastreen a las personas usuarias.
+          compartimos información personal identificable de quienes usan la aplicación. Tampoco utilizamos servicios de 
+          ni herramientas de terceros que rastreen a las personas usuarias.
         </p>
 
         <p>
@@ -26,7 +26,7 @@ export default function CosechasMegaPrivacy() {
 
         <p>
           Si tienes preguntas sobre esta política de privacidad, puedes escribirnos a
-          <a class="text-indigo-600 font-medium" href="mailto:contacto@cosechasmega.com"> contacto@cosechasmega.com</a>.
+          <a class="text-indigo-600 font-medium" href="mailto:contacto@cosechasmega.com"> drh_river@hotmail.com</a>.
         </p>
       </article>
     </section>
