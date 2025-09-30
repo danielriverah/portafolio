@@ -1,84 +1,3 @@
-/*import { useState, useEffect } from 'preact/hooks';
-import Nav from './components/Nav.jsx';
-import Home from './pages/Home.jsx';
-import CV from './pages/CV.jsx';
-import Portfolio from './pages/Portfolio.jsx';
-import Privacy from './pages/Privacy.jsx';
-import CosechasMegaPrivacy from './pages/CosechasMegaPrivacy.jsx';
-
-// Ruta "limpia" que sí debe vivir con history API
-const PRIVACY_PATH = '/cosechasmega/privacidad';
-
-const isPrivacyPath = (pathname) => {
-  // Soporta con o sin slash final
-  return pathname === PRIVACY_PATH || pathname === PRIVACY_PATH + '/';
-};
-
-const getHashPage = () => {
-  // Acepta "#home" o "#/home"
-  const h = window.location.hash.replace(/^#\/?/, '').trim();
-  return h || 'home';
-};
-
-const getCurrentPage = () => {
-  const { pathname } = window.location;
-  if (isPrivacyPath(pathname)) return 'cosechasmega/privacidad';
-  return getHashPage();
-};
-
-export default function App() {
-  const [page, setPage] = useState(getCurrentPage);
-
-  useEffect(() => {
-    const onRouteChange = () => setPage(getCurrentPage());
-    window.addEventListener('hashchange', onRouteChange);
-    window.addEventListener('popstate', onRouteChange);
-    return () => {
-      window.removeEventListener('hashchange', onRouteChange);
-      window.removeEventListener('popstate', onRouteChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    const { pathname, hash } = window.location;
-
-    if (page === 'cosechasmega/privacidad') {
-      // Mantén la URL limpia exacta
-      const desired = PRIVACY_PATH;
-      if (!isPrivacyPath(pathname)) {
-        window.history.replaceState(null, '', desired);
-      }
-      // No toques el hash en esta ruta
-      if (hash) {
-        window.history.replaceState(null, '', desired);
-      }
-      return;
-    }
-
-    // Para todas las demás páginas, usa hash routing y mantén pathname en "/"
-    const desiredHash = `#${page}`;
-    if (pathname !== '/') {
-      window.history.replaceState(null, '', '/');
-    }
-    if (hash !== desiredHash) {
-      // Usar assignment evita disparar popstate extra
-      window.location.hash = desiredHash;
-    }
-  }, [page]);
-
-  return (
-    <div class="min-h-screen flex flex-col">
-      <Nav />
-      <main class="flex-1">
-        {page === 'home' && <Home />}
-        {page === 'cv' && <CV />}
-        {page === 'portafolio' && <Portfolio />}
-        {page === 'cosechasmega/privacidad' && <CosechasMegaPrivacy />}
-      </main>
-    </div>
-  );
-}*/
-
 import { useState, useEffect } from 'preact/hooks';
 import Nav from './components/Nav.jsx';
 import Home from './pages/Home.jsx';
@@ -86,14 +5,34 @@ import CV from './pages/CV.jsx';
 import Portfolio from './pages/Portfolio.jsx';
 import Privacy from './pages/Privacy.jsx';
 import CosechasMegaPrivacy from './pages/CosechasMegaPrivacy.jsx';
+import CosechasMegaTerms from './pages/CosechasMegaTerms.jsx';
+import CosechasMegaLicense from './pages/CosechasMegaLicense.jsx';
+import DevsRiveraPrivacy from './pages/DevsRiveraPrivacy.jsx';
+import DevsRiveraTerms from './pages/DevsRiveraTerms.jsx';
+import DevsRiveraLicense from './pages/DevsRiveraLicense.jsx';
+import FieldToolsPrivacy from './pages/FieldToolsPrivacy.jsx';
+import FieldToolsTerms from './pages/FieldToolsTerms.jsx';
+import FieldToolsLicense from './pages/FieldToolsLicense.jsx';
 
 const ROUTES = {
-  home: '/',
-  cv: '/cv',
-  portafolio: '/portafolio',
-  privacidad: '/privacidad',
-  'cosechasmega/privacidad': '/cosechasmega/privacidad',
+  home: { path: '/', component: Home },
+  cv: { path: '/cv', component: CV },
+  portafolio: { path: '/portafolio', component: Portfolio },
+  privacidad: { path: '/privacidad', component: Privacy },
+  'cosechasmega/privacidad': { path: '/cosechasmega/privacidad', component: CosechasMegaPrivacy },
+  'cosechasmega/terminos': { path: '/cosechasmega/terminos', component: CosechasMegaTerms },
+  'cosechasmega/licencia': { path: '/cosechasmega/licencia', component: CosechasMegaLicense },
+  'devsrivera/privacidad': { path: '/devsrivera/privacidad', component: DevsRiveraPrivacy },
+  'devsrivera/terminos': { path: '/devsrivera/terminos', component: DevsRiveraTerms },
+  'devsrivera/licencia': { path: '/devsrivera/licencia', component: DevsRiveraLicense },
+  'field-tools/privacidad': { path: '/field-tools/privacidad', component: FieldToolsPrivacy },
+  'field-tools/terminos': { path: '/field-tools/terminos', component: FieldToolsTerms },
+  'field-tools/licencia': { path: '/field-tools/licencia', component: FieldToolsLicense },
 };
+
+const PATH_TO_PAGE = Object.fromEntries(
+  Object.entries(ROUTES).map(([page, config]) => [config.path, page])
+);
 
 const normalisePath = (pathname) => {
   if (!pathname) return '/';
@@ -103,21 +42,7 @@ const normalisePath = (pathname) => {
 
 const getCurrentPage = () => {
   const rawPath = normalisePath(window.location.pathname);
-
-  switch (rawPath) {
-    case '/':
-      return 'home';
-    case '/cv':
-      return 'cv';
-    case '/portafolio':
-      return 'portafolio';
-    case '/privacidad':
-      return 'privacidad';
-    case '/cosechasmega/privacidad':
-      return 'cosechasmega/privacidad';
-    default:
-      return 'home';
-  }
+  return PATH_TO_PAGE[rawPath] ?? 'home';
 };
 
 export default function App() {
@@ -132,7 +57,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const desiredPath = ROUTES[page] ?? '/';
+    const desiredPath = ROUTES[page]?.path ?? '/';
     const currentPath = normalisePath(window.location.pathname);
     const normalisedDesired = normalisePath(desiredPath);
 
@@ -141,15 +66,13 @@ export default function App() {
     }
   }, [page]);
 
+  const ActiveComponent = ROUTES[page]?.component ?? Home;
+
   return (
     <div class="min-h-screen flex flex-col">
       <Nav />
       <main class="flex-1">
-        {page === 'home' && <Home />}
-        {page === 'cv' && <CV />}
-        {page === 'portafolio' && <Portfolio />}
-        {page === 'privacidad' && <Privacy />}
-        {page === 'cosechasmega/privacidad' && <CosechasMegaPrivacy />}
+        <ActiveComponent />
       </main>
     </div>
   );
