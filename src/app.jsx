@@ -84,6 +84,7 @@ import Nav from './components/Nav.jsx';
 import Home from './pages/Home.jsx';
 import CV from './pages/CV.jsx';
 import Portfolio from './pages/Portfolio.jsx';
+import Privacy from './pages/Privacy.jsx';
 import CosechasMegaPrivacy from './pages/CosechasMegaPrivacy.jsx';
 
 const ROUTES = {
